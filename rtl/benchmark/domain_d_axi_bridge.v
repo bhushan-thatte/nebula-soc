@@ -17,7 +17,8 @@ module domain_d_axi_bridge (
     output wire        slow_valid,
     input  wire        slow_ready,
     output wire [7:0]  slow_addr,
-    output wire [23:0] slow_data
+    output wire [23:0] slow_data,
+    output wire         slow_clk
 );
 
     wire clk_50;
@@ -75,6 +76,7 @@ module domain_d_axi_bridge (
     assign slow_valid = !fifo_empty;
     assign slow_addr  = fifo_rd_data[31:24];
     assign slow_data  = fifo_rd_data[23:0];
+    assign slow_clk = clk_50;
 
     wire fifo_wr_en_sync;
     sync_2ff #(.WIDTH(1)) u_sync_wr_en (
