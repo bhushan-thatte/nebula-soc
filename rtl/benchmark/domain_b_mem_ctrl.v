@@ -9,21 +9,21 @@ module domain_b_mem_ctrl (
 
     input  wire        req0_valid,
     output wire        req0_grant,
-    input  wire [7:0]  req0_addr,
+    input  wire [5:0]  req0_addr,
     input  wire [7:0]  req0_wdata,
     input  wire        req0_we,
     output wire [7:0]  req0_rdata,
 
     input  wire        req1_valid,
     output wire        req1_grant,
-    input  wire [7:0]  req1_addr,
+    input  wire [5:0]  req1_addr,
     input  wire [7:0]  req1_wdata,
     input  wire        req1_we,
     output wire [7:0]  req1_rdata,
 
     input  wire        req2_valid,
     output wire        req2_grant,
-    input  wire [7:0]  req2_addr,
+    input  wire [5:0]  req2_addr,
     input  wire [7:0]  req2_wdata,
     input  wire        req2_we,
     output wire [7:0]  req2_rdata
@@ -85,9 +85,9 @@ module domain_b_mem_ctrl (
         end
     end
 
-    reg [7:0] mem [0:255];
+    reg [7:0] mem [0:63];  // 64 entries (was 256) - keeps cell count reasonable
 
-    wire [7:0] mux_addr  = grant0 ? req0_addr  : grant1 ? req1_addr  : req2_addr;
+    wire [5:0] mux_addr  = grant0 ? req0_addr  : grant1 ? req1_addr  : req2_addr;
     wire [7:0] mux_wdata = grant0 ? req0_wdata : grant1 ? req1_wdata : req2_wdata;
     wire       mux_we    = grant0 ? req0_we    : grant1 ? req1_we    : req2_we;
     wire       mux_valid = grant0 | grant1 | grant2;
