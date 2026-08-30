@@ -3,11 +3,18 @@
 // Clock: clk_dsp (250MHz master) + gen_clk_50 (divided /5)
 // Function: Direct-form FIR filter, 24-bit signed samples
 //
-// INTENTIONAL DESIGN NOTE: the multiply-accumulate stage below is
-// built as a SINGLE combinational block (all 16 taps computed in
-// one cycle). This is realistic but timing-unfriendly - exactly
-// the kind of critical path a GenAI optimization engine should
-// identify and fix via pipelining. Do not "pre-optimize" this.
+// PIPELINE HISTORY (GenAI-assisted timing closure iterations):
+//   v1: serial 15-add chain (WNS -3.85ns, TNS -49.59ns)
+//   v2: balanced binary adder tree, unpipelined (WNS -3.14ns, TNS -43.95ns)
+//   v3: added pipeline register after Level 2 (WNS -0.64ns, TNS -4.58ns)
+//   v4 (this version): added a SECOND pipeline register after Level 1,
+//       splitting Level 1 and Level 2 addition across a clock edge.
+//       GenAI engine (qwen2.5-coder:7b) identified ha_1/fa_1 ripple-carry
+//       cells as the dominant delay source across all 16 remaining
+//       violations and recommended ADD_PIPELINE_STAGE (11/16 votes).
+//       This adds 1 more cycle of latency (2 -> 3 cycles total,
+//       sample_valid to result_valid) -- requires updated formal
+//       equivalence checking (latency-aware) in Week 3.
 // ============================================================
 module domain_c_dsp_fir (
     input  wire                  clk_dsp,
@@ -65,14 +72,7 @@ module domain_c_dsp_fir (
         end
     end
 
-        // ---- Balanced binary adder tree (replaces serial 15-add chain) ----
-    // FIX: original serial sum (p0+p1+p2+...+p15) created a 15-deep
-    // sequential adder chain - this is the root cause of our timing
-    // violation. Restructuring into a balanced tree reduces the
-    // critical path to just 4 sequential addition stages (log2(16)),
-    // with IDENTICAL cycle-accurate behavior (same latency, same
-    // result) - purely a logic restructuring fix, no pipelining needed.
-
+    // ---- Balanced binary adder tree ----
     wire signed [39:0] p0  = delay[0]  * TAP0;
     wire signed [39:0] p1  = delay[1]  * TAP1;
     wire signed [39:0] p2  = delay[2]  * TAP2;
@@ -100,17 +100,46 @@ module domain_c_dsp_fir (
     wire signed [40:0] s1_6 = p12 + p13;
     wire signed [40:0] s1_7 = p14 + p15;
 
-        // Level 2: 8 -> 4
-    wire signed [41:0] s2_0 = s1_0 + s1_1;
-    wire signed [41:0] s2_1 = s1_2 + s1_3;
-    wire signed [41:0] s2_2 = s1_4 + s1_5;
-    wire signed [41:0] s2_3 = s1_6 + s1_7;
+    // ---- NEW PIPELINE REGISTER (v4): break the critical path after
+    // Level 1, so multiply+add1 and add2 no longer share a combinational
+    // path. This is the GenAI-recommended fix for the ha_1/fa_1
+    // ripple-carry delay identified in all 16 remaining violations. ----
+    reg signed [40:0] reg_s1_0, reg_s1_1, reg_s1_2, reg_s1_3;
+    reg signed [40:0] reg_s1_4, reg_s1_5, reg_s1_6, reg_s1_7;
+    reg                valid_stage0;
 
-    // ---- PIPELINE REGISTER: break the critical path here ----
-    // Registers the 4 partial sums from Level 2, splitting the tree
-    // into two pipeline stages. Adds 1 cycle of latency (was 1 cycle
-    // total, now 2), which is why we also need to delay sample_valid
-    // by one extra cycle below to keep result_valid correctly aligned.
+    always @(posedge clk_dsp or negedge rst_n_dsp) begin
+        if (!rst_n_dsp) begin
+            reg_s1_0     <= 41'sd0;
+            reg_s1_1     <= 41'sd0;
+            reg_s1_2     <= 41'sd0;
+            reg_s1_3     <= 41'sd0;
+            reg_s1_4     <= 41'sd0;
+            reg_s1_5     <= 41'sd0;
+            reg_s1_6     <= 41'sd0;
+            reg_s1_7     <= 41'sd0;
+            valid_stage0 <= 1'b0;
+        end else begin
+            reg_s1_0     <= s1_0;
+            reg_s1_1     <= s1_1;
+            reg_s1_2     <= s1_2;
+            reg_s1_3     <= s1_3;
+            reg_s1_4     <= s1_4;
+            reg_s1_5     <= s1_5;
+            reg_s1_6     <= s1_6;
+            reg_s1_7     <= s1_7;
+            valid_stage0 <= sample_valid;
+        end
+    end
+
+    // Level 2: 8 -> 4 (now operating on registered Level-1 values)
+    wire signed [41:0] s2_0 = reg_s1_0 + reg_s1_1;
+    wire signed [41:0] s2_1 = reg_s1_2 + reg_s1_3;
+    wire signed [41:0] s2_2 = reg_s1_4 + reg_s1_5;
+    wire signed [41:0] s2_3 = reg_s1_6 + reg_s1_7;
+
+    // ---- EXISTING PIPELINE REGISTER (v3): unchanged from prior
+    // milestone -- registers the 4 partial sums from Level 2. ----
     reg signed [41:0] reg_s2_0, reg_s2_1, reg_s2_2, reg_s2_3;
     reg                valid_stage1;
 
@@ -126,7 +155,7 @@ module domain_c_dsp_fir (
             reg_s2_1     <= s2_1;
             reg_s2_2     <= s2_2;
             reg_s2_3     <= s2_3;
-            valid_stage1 <= sample_valid;
+            valid_stage1 <= valid_stage0;   // CHANGED: was <= sample_valid
         end
     end
 
