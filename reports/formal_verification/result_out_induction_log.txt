@@ -1,0 +1,17 @@
+##   0:00:00  Solver: bitwuzla
+##   0:00:00  Trying induction in step 8..
+##   0:00:00  Trying induction in step 7..
+##   0:00:00  Trying induction in step 6..
+##   0:00:00  Trying induction in step 5..
+##   0:00:00  Trying induction in step 4..
+##   0:00:00  Trying induction in step 3..
+##   0:00:04  Trying induction in step 2..
+##   0:00:12  Trying induction in step 1..
+##   0:00:18  Trying induction in step 0..
+##   0:00:26  Temporal induction failed!
+##   0:00:26  Assert failed in miter: ../../../../../partitions/domain_c_dsp_fir_gate.result_out.sv:70.37-70.49 (_witness_.assert_flatten___po_result_out__assert__assert________________partitions_domain_c_dsp_fir_gate_result_out_sv_70_902)
+##   0:00:26  Writing trace to VCD file: engine_0/trace_induct.vcd
+##   0:00:26  Writing trace to Verilog testbench: engine_0/trace_induct_tb.v
+##   0:00:26  Writing trace to constraints file: engine_0/trace_induct.smtc
+##   0:00:26  Writing trace to Yosys witness file: engine_0/trace_induct.yw
+##   0:00:26  Status: failed

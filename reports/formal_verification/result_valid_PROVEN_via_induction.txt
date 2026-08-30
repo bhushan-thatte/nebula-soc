@@ -1,0 +1,1567 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.47+121 (git sha1 98b4affc4, clang++ 18.1.8 -fPIC -O3)
+
+-- Executing script file `run.ys' --
+
+1. Executing Verilog-2005 frontend: ../../../partitions/domain_c_dsp_fir_gate.result_valid.sv
+Parsing SystemVerilog input from `../../../partitions/domain_c_dsp_fir_gate.result_valid.sv' to AST representation.
+Generating RTLIL representation for module `\miter'.
+Generating RTLIL representation for module `\miter_cmp_prop'.
+Generating RTLIL representation for module `\miter_def_prop'.
+Generating RTLIL representation for module `\gold.domain_c_dsp_fir_gate.result_valid'.
+Generating RTLIL representation for module `\gate.domain_c_dsp_fir_gate.result_valid'.
+Successfully finished Verilog frontend.
+
+2. Executing RTLIL frontend.
+Input filename: ../../../partitions/domain_c_dsp_fir_gate.result_valid.il
+Replacing existing blackbox module \gate.domain_c_dsp_fir_gate.result_valid.
+Replacing existing blackbox module \gold.domain_c_dsp_fir_gate.result_valid.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     \miter_cmp_prop
+Used module:     \gate.domain_c_dsp_fir_gate.result_valid
+Used module:     \gold.domain_c_dsp_fir_gate.result_valid
+Parameter 1 (\WIDTH) = 1
+Parameter 2 (\TYPE) = 48'011000010111001101110011011001010111001001110100
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\miter_cmp_prop'.
+Parameter 1 (\WIDTH) = 1
+Parameter 2 (\TYPE) = 48'011000010111001101110011011001010111001001110100
+Generating RTLIL representation for module `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop'.
+
+3.3. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop
+Used module:     \gate.domain_c_dsp_fir_gate.result_valid
+Used module:     \gold.domain_c_dsp_fir_gate.result_valid
+
+3.4. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop
+Used module:     \gate.domain_c_dsp_fir_gate.result_valid
+Used module:     \gold.domain_c_dsp_fir_gate.result_valid
+Removing unused module `\miter_def_prop'.
+Removing unused module `\miter_cmp_prop'.
+Removed 2 unused modules.
+Module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop directly or indirectly contains formal properties -> setting "keep" attribute.
+Module miter directly or indirectly contains formal properties -> setting "keep" attribute.
+Mapping positional arguments of cell miter.__po_result_valid__assert ($paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop).
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 3 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:66$777'.
+Creating decoders for process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:60$772'.
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.\okay' from process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:60$772'.
+No latch inferred for signal `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.\i' from process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:60$772'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:66$777'.
+Removing empty process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/domain_c_dsp_fir_gate.result_valid.sv:60$772'.
+Cleaned up 0 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module gate.domain_c_dsp_fir_gate.result_valid.
+Optimizing module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.
+<suppressed ~1 debug messages>
+Optimizing module gold.domain_c_dsp_fir_gate.result_valid.
+Optimizing module miter.
+
+5. Executing ASYNC2SYNC pass.
+Replacing gate.domain_c_dsp_fir_gate.result_valid.$procdff$256 ($adff): ARST=\rst_n_dsp, D=\u_sync_sample_valid.async_in, Q=\valid_stage0
+Replacing gate.domain_c_dsp_fir_gate.result_valid.$procdff$211 ($adff): ARST=\rst_n_dsp, D=\valid_stage0, Q=\valid_stage1
+Replacing gate.domain_c_dsp_fir_gate.result_valid.$procdff$186 ($adff): ARST=\rst_n_dsp, D=\valid_stage1, Q=\result_valid
+Replacing gate.domain_c_dsp_fir_gate.result_valid.$flatten\u_rst_dsp.$procdff$161 ($adff): ARST=\u_div50.rst_n, D=1'1, Q=\u_rst_dsp.rst_ff1
+Replacing gate.domain_c_dsp_fir_gate.result_valid.$flatten\u_rst_dsp.$procdff$156 ($adff): ARST=\u_div50.rst_n, D=\u_rst_dsp.rst_ff1, Q=\u_rst_dsp.sync_rst_n
+Replacing gold.domain_c_dsp_fir_gate.result_valid.$procdff$181 ($adff): ARST=\u_gold.u_sync_sample_valid.rst_n, D=\result_valid_inner, Q=\result_valid
+Replacing gold.domain_c_dsp_fir_gate.result_valid.$flatten\u_gold.u_rst_dsp.$procdff$161 ($adff): ARST=\u_gold.u_sync_sample_valid.rst_n, D=1'1, Q=\u_gold.u_rst_dsp.rst_ff1
+Replacing gold.domain_c_dsp_fir_gate.result_valid.$flatten\u_gold.u_rst_dsp.$procdff$156 ($adff): ARST=\u_gold.u_sync_sample_valid.rst_n, D=\u_gold.u_rst_dsp.rst_ff1, Q=\u_gold.u_rst_dsp.sync_rst_n
+Replacing gold.domain_c_dsp_fir_gate.result_valid.$flatten\u_gold.$procdff$221 ($adff): ARST=\u_gold.rst_n_dsp, D=\u_gold.u_sync_sample_valid.async_in, Q=\u_gold.valid_stage1
+Replacing gold.domain_c_dsp_fir_gate.result_valid.$flatten\u_gold.$procdff$196 ($adff): ARST=\u_gold.rst_n_dsp, D=\u_gold.valid_stage1, Q=\u_gold.result_valid
+
+6. Executing FORMALFF pass.
+
+7. Executing SETUNDEF pass (replace undef values with defined constants).
+
+8. Executing FLATTEN pass (flatten design).
+Deleting now unused module gate.domain_c_dsp_fir_gate.result_valid.
+Deleting now unused module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.
+Deleting now unused module gold.domain_c_dsp_fir_gate.result_valid.
+<suppressed ~3 debug messages>
+
+9. Executing DFFUNMAP pass (unmap clock enable and synchronous reset from FFs).
+
+10. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+<suppressed ~1 debug messages>
+
+11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \miter..
+Removed 1 unused cells and 7 unused wires.
+<suppressed ~20 debug messages>
+
+12. Executing SAT pass (solving SAT problems in the circuit).
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+
+** Trying induction with length 1 **
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Final init constraint equation: { $flatten\gold.$auto$async2sync.cc:228:execute$791 $flatten\gold.$auto$async2sync.cc:228:execute$793 $flatten\gold.$auto$async2sync.cc:228:execute$795 $flatten\gold.$auto$async2sync.cc:228:execute$797 $flatten\gold.$auto$async2sync.cc:228:execute$789 } = 5'x
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[base case 1] Solving problem with 543 variables and 1428 clauses..
+Base case for induction length 1 proven.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[induction step 1] Solving problem with 1124 variables and 2956 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                                    Dec       Hex                                 Bin
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+  init $flatten\gate.$auto$async2sync.cc:228:execute$779                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$781                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$783                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$785                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$787                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$789                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$791                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$793                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$795                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$797                0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     1 \__pi_clk_dsp                                                    0         0                                   0
+     1 \__pi_rst_n                                                      1         1                                   1
+     1 \__pi_sample_valid                                               0         0                                   0
+     1 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     1 \__po_result_valid__assert.in_gate                               0         0                                   0
+     1 \__po_result_valid__assert.in_gold                               0         0                                   0
+     1 \__po_result_valid__assert.okay                                  1         1                                   1
+     1 \__po_result_valid__gate                                         0         0                                   0
+     1 \__po_result_valid__gold                                         0         0                                   0
+     1 \gate.__pi_clk_dsp                                               0         0                                   0
+     1 \gate.__pi_rst_n                                                 1         1                                   1
+     1 \gate.__pi_sample_valid                                          0         0                                   0
+     1 \gate.__po_result_valid                                          0         0                                   0
+     1 \gate.clk_dsp                                                    0         0                                   0
+     1 \gate.result_valid                                               0         0                                   0
+     1 \gate.rst_n                                                      1         1                                   1
+     1 \gate.rst_n_dsp                                                  1         1                                   1
+     1 \gate.sample_valid                                               0         0                                   0
+     1 \gate.u_div50.clk_in                                             0         0                                   0
+     1 \gate.u_div50.rst_n                                              1         1                                   1
+     1 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     1 \gate.u_rst_dsp.clk                                              0         0                                   0
+     1 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     1 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     1 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     1 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     1 \gate.valid_stage0                                               0         0                                   0
+     1 \gate.valid_stage1                                               1         1                                   1
+     1 \gold.__pi_clk_dsp                                               0         0                                   0
+     1 \gold.__pi_rst_n                                                 1         1                                   1
+     1 \gold.__pi_sample_valid                                          0         0                                   0
+     1 \gold.__po_result_valid                                          0         0                                   0
+     1 \gold.clk_dsp                                                    0         0                                   0
+     1 \gold.result_valid                                               0         0                                   0
+     1 \gold.result_valid_inner                                         0         0                                   0
+     1 \gold.rst_n                                                      1         1                                   1
+     1 \gold.sample_valid                                               0         0                                   0
+     1 \gold.u_gold.clk_dsp                                             0         0                                   0
+     1 \gold.u_gold.result_valid                                        0         0                                   0
+     1 \gold.u_gold.rst_n                                               1         1                                   1
+     1 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     1 \gold.u_gold.sample_valid                                        0         0                                   0
+     1 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     1 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.rst_ff1                                   0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     1 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     1 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     1 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     2 \__pi_clk_dsp                                                    0         0                                   0
+     2 \__pi_rst_n                                                      1         1                                   1
+     2 \__pi_sample_valid                                               0         0                                   0
+     2 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     2 \__po_result_valid__assert.in_gate                               1         1                                   1
+     2 \__po_result_valid__assert.in_gold                               0         0                                   0
+     2 \__po_result_valid__assert.okay                                  0         0                                   0
+     2 \__po_result_valid__gate                                         1         1                                   1
+     2 \__po_result_valid__gold                                         0         0                                   0
+     2 \gate.__pi_clk_dsp                                               0         0                                   0
+     2 \gate.__pi_rst_n                                                 1         1                                   1
+     2 \gate.__pi_sample_valid                                          0         0                                   0
+     2 \gate.__po_result_valid                                          1         1                                   1
+     2 \gate.clk_dsp                                                    0         0                                   0
+     2 \gate.result_valid                                               1         1                                   1
+     2 \gate.rst_n                                                      1         1                                   1
+     2 \gate.rst_n_dsp                                                  1         1                                   1
+     2 \gate.sample_valid                                               0         0                                   0
+     2 \gate.u_div50.clk_in                                             0         0                                   0
+     2 \gate.u_div50.rst_n                                              1         1                                   1
+     2 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     2 \gate.u_rst_dsp.clk                                              0         0                                   0
+     2 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     2 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     2 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     2 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     2 \gate.valid_stage0                                               0         0                                   0
+     2 \gate.valid_stage1                                               0         0                                   0
+     2 \gold.__pi_clk_dsp                                               0         0                                   0
+     2 \gold.__pi_rst_n                                                 1         1                                   1
+     2 \gold.__pi_sample_valid                                          0         0                                   0
+     2 \gold.__po_result_valid                                          0         0                                   0
+     2 \gold.clk_dsp                                                    0         0                                   0
+     2 \gold.result_valid                                               0         0                                   0
+     2 \gold.result_valid_inner                                         0         0                                   0
+     2 \gold.rst_n                                                      1         1                                   1
+     2 \gold.sample_valid                                               0         0                                   0
+     2 \gold.u_gold.clk_dsp                                             0         0                                   0
+     2 \gold.u_gold.result_valid                                        0         0                                   0
+     2 \gold.u_gold.rst_n                                               1         1                                   1
+     2 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     2 \gold.u_gold.sample_valid                                        0         0                                   0
+     2 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     2 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     2 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     2 \gold.u_gold.valid_stage1                                        0         0                                   0
+
+** Trying induction with length 2 **
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[base case 2] Solving problem with 1241 variables and 3320 clauses..
+Base case for induction length 2 proven.
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[induction step 2] Solving problem with 1908 variables and 5115 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                                    Dec       Hex                                 Bin
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+  init $flatten\gate.$auto$async2sync.cc:228:execute$779                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$781                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$783                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$785                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$787                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$789                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$791                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$793                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$795                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$797                1         1                                   1
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     1 \__pi_clk_dsp                                                    0         0                                   0
+     1 \__pi_rst_n                                                      1         1                                   1
+     1 \__pi_sample_valid                                               0         0                                   0
+     1 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     1 \__po_result_valid__assert.in_gate                               1         1                                   1
+     1 \__po_result_valid__assert.in_gold                               1         1                                   1
+     1 \__po_result_valid__assert.okay                                  1         1                                   1
+     1 \__po_result_valid__gate                                         1         1                                   1
+     1 \__po_result_valid__gold                                         1         1                                   1
+     1 \gate.__pi_clk_dsp                                               0         0                                   0
+     1 \gate.__pi_rst_n                                                 1         1                                   1
+     1 \gate.__pi_sample_valid                                          0         0                                   0
+     1 \gate.__po_result_valid                                          1         1                                   1
+     1 \gate.clk_dsp                                                    0         0                                   0
+     1 \gate.result_valid                                               1         1                                   1
+     1 \gate.rst_n                                                      1         1                                   1
+     1 \gate.rst_n_dsp                                                  1         1                                   1
+     1 \gate.sample_valid                                               0         0                                   0
+     1 \gate.u_div50.clk_in                                             0         0                                   0
+     1 \gate.u_div50.rst_n                                              1         1                                   1
+     1 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     1 \gate.u_rst_dsp.clk                                              0         0                                   0
+     1 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     1 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     1 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     1 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     1 \gate.valid_stage0                                               1         1                                   1
+     1 \gate.valid_stage1                                               0         0                                   0
+     1 \gold.__pi_clk_dsp                                               0         0                                   0
+     1 \gold.__pi_rst_n                                                 1         1                                   1
+     1 \gold.__pi_sample_valid                                          0         0                                   0
+     1 \gold.__po_result_valid                                          1         1                                   1
+     1 \gold.clk_dsp                                                    0         0                                   0
+     1 \gold.result_valid                                               1         1                                   1
+     1 \gold.result_valid_inner                                         0         0                                   0
+     1 \gold.rst_n                                                      1         1                                   1
+     1 \gold.sample_valid                                               0         0                                   0
+     1 \gold.u_gold.clk_dsp                                             0         0                                   0
+     1 \gold.u_gold.result_valid                                        0         0                                   0
+     1 \gold.u_gold.rst_n                                               1         1                                   1
+     1 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     1 \gold.u_gold.sample_valid                                        0         0                                   0
+     1 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     1 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.rst_ff1                                   0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     1 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     1 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     1 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     2 \__pi_clk_dsp                                                    0         0                                   0
+     2 \__pi_rst_n                                                      1         1                                   1
+     2 \__pi_sample_valid                                               0         0                                   0
+     2 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     2 \__po_result_valid__assert.in_gate                               0         0                                   0
+     2 \__po_result_valid__assert.in_gold                               0         0                                   0
+     2 \__po_result_valid__assert.okay                                  1         1                                   1
+     2 \__po_result_valid__gate                                         0         0                                   0
+     2 \__po_result_valid__gold                                         0         0                                   0
+     2 \gate.__pi_clk_dsp                                               0         0                                   0
+     2 \gate.__pi_rst_n                                                 1         1                                   1
+     2 \gate.__pi_sample_valid                                          0         0                                   0
+     2 \gate.__po_result_valid                                          0         0                                   0
+     2 \gate.clk_dsp                                                    0         0                                   0
+     2 \gate.result_valid                                               0         0                                   0
+     2 \gate.rst_n                                                      1         1                                   1
+     2 \gate.rst_n_dsp                                                  1         1                                   1
+     2 \gate.sample_valid                                               0         0                                   0
+     2 \gate.u_div50.clk_in                                             0         0                                   0
+     2 \gate.u_div50.rst_n                                              1         1                                   1
+     2 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     2 \gate.u_rst_dsp.clk                                              0         0                                   0
+     2 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     2 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     2 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     2 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     2 \gate.valid_stage0                                               0         0                                   0
+     2 \gate.valid_stage1                                               1         1                                   1
+     2 \gold.__pi_clk_dsp                                               0         0                                   0
+     2 \gold.__pi_rst_n                                                 1         1                                   1
+     2 \gold.__pi_sample_valid                                          0         0                                   0
+     2 \gold.__po_result_valid                                          0         0                                   0
+     2 \gold.clk_dsp                                                    0         0                                   0
+     2 \gold.result_valid                                               0         0                                   0
+     2 \gold.result_valid_inner                                         0         0                                   0
+     2 \gold.rst_n                                                      1         1                                   1
+     2 \gold.sample_valid                                               0         0                                   0
+     2 \gold.u_gold.clk_dsp                                             0         0                                   0
+     2 \gold.u_gold.result_valid                                        0         0                                   0
+     2 \gold.u_gold.rst_n                                               1         1                                   1
+     2 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     2 \gold.u_gold.sample_valid                                        0         0                                   0
+     2 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     2 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     2 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     2 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     3 \__pi_clk_dsp                                                    0         0                                   0
+     3 \__pi_rst_n                                                      1         1                                   1
+     3 \__pi_sample_valid                                               0         0                                   0
+     3 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     3 \__po_result_valid__assert.in_gate                               1         1                                   1
+     3 \__po_result_valid__assert.in_gold                               0         0                                   0
+     3 \__po_result_valid__assert.okay                                  0         0                                   0
+     3 \__po_result_valid__gate                                         1         1                                   1
+     3 \__po_result_valid__gold                                         0         0                                   0
+     3 \gate.__pi_clk_dsp                                               0         0                                   0
+     3 \gate.__pi_rst_n                                                 1         1                                   1
+     3 \gate.__pi_sample_valid                                          0         0                                   0
+     3 \gate.__po_result_valid                                          1         1                                   1
+     3 \gate.clk_dsp                                                    0         0                                   0
+     3 \gate.result_valid                                               1         1                                   1
+     3 \gate.rst_n                                                      1         1                                   1
+     3 \gate.rst_n_dsp                                                  1         1                                   1
+     3 \gate.sample_valid                                               0         0                                   0
+     3 \gate.u_div50.clk_in                                             0         0                                   0
+     3 \gate.u_div50.rst_n                                              1         1                                   1
+     3 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     3 \gate.u_rst_dsp.clk                                              0         0                                   0
+     3 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     3 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     3 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     3 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     3 \gate.valid_stage0                                               0         0                                   0
+     3 \gate.valid_stage1                                               0         0                                   0
+     3 \gold.__pi_clk_dsp                                               0         0                                   0
+     3 \gold.__pi_rst_n                                                 1         1                                   1
+     3 \gold.__pi_sample_valid                                          0         0                                   0
+     3 \gold.__po_result_valid                                          0         0                                   0
+     3 \gold.clk_dsp                                                    0         0                                   0
+     3 \gold.result_valid                                               0         0                                   0
+     3 \gold.result_valid_inner                                         0         0                                   0
+     3 \gold.rst_n                                                      1         1                                   1
+     3 \gold.sample_valid                                               0         0                                   0
+     3 \gold.u_gold.clk_dsp                                             0         0                                   0
+     3 \gold.u_gold.result_valid                                        0         0                                   0
+     3 \gold.u_gold.rst_n                                               1         1                                   1
+     3 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     3 \gold.u_gold.sample_valid                                        0         0                                   0
+     3 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     3 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     3 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     3 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     3 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     3 \gold.u_gold.valid_stage1                                        0         0                                   0
+
+** Trying induction with length 3 **
+
+Setting up time step 3:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[base case 3] Solving problem with 2004 variables and 5417 clauses..
+Base case for induction length 3 proven.
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[induction step 3] Solving problem with 2763 variables and 7496 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                                    Dec       Hex                                 Bin
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+  init $flatten\gate.$auto$async2sync.cc:228:execute$779                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$781                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$783                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$785                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$787                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$789                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$791                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$793                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$795                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$797                1         1                                   1
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     1 \__pi_clk_dsp                                                    0         0                                   0
+     1 \__pi_rst_n                                                      1         1                                   1
+     1 \__pi_sample_valid                                               1         1                                   1
+     1 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     1 \__po_result_valid__assert.in_gate                               0         0                                   0
+     1 \__po_result_valid__assert.in_gold                               0         0                                   0
+     1 \__po_result_valid__assert.okay                                  1         1                                   1
+     1 \__po_result_valid__gate                                         0         0                                   0
+     1 \__po_result_valid__gold                                         0         0                                   0
+     1 \gate.__pi_clk_dsp                                               0         0                                   0
+     1 \gate.__pi_rst_n                                                 1         1                                   1
+     1 \gate.__pi_sample_valid                                          1         1                                   1
+     1 \gate.__po_result_valid                                          0         0                                   0
+     1 \gate.clk_dsp                                                    0         0                                   0
+     1 \gate.result_valid                                               0         0                                   0
+     1 \gate.rst_n                                                      1         1                                   1
+     1 \gate.rst_n_dsp                                                  1         1                                   1
+     1 \gate.sample_valid                                               1         1                                   1
+     1 \gate.u_div50.clk_in                                             0         0                                   0
+     1 \gate.u_div50.rst_n                                              1         1                                   1
+     1 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     1 \gate.u_rst_dsp.clk                                              0         0                                   0
+     1 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     1 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     1 \gate.u_sync_sample_valid.async_in                               1         1                                   1
+     1 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     1 \gate.valid_stage0                                               0         0                                   0
+     1 \gate.valid_stage1                                               1         1                                   1
+     1 \gold.__pi_clk_dsp                                               0         0                                   0
+     1 \gold.__pi_rst_n                                                 1         1                                   1
+     1 \gold.__pi_sample_valid                                          1         1                                   1
+     1 \gold.__po_result_valid                                          0         0                                   0
+     1 \gold.clk_dsp                                                    0         0                                   0
+     1 \gold.result_valid                                               0         0                                   0
+     1 \gold.result_valid_inner                                         1         1                                   1
+     1 \gold.rst_n                                                      1         1                                   1
+     1 \gold.sample_valid                                               1         1                                   1
+     1 \gold.u_gold.clk_dsp                                             0         0                                   0
+     1 \gold.u_gold.result_valid                                        1         1                                   1
+     1 \gold.u_gold.rst_n                                               1         1                                   1
+     1 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     1 \gold.u_gold.sample_valid                                        1         1                                   1
+     1 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     1 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.rst_ff1                                   0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     1 \gold.u_gold.u_sync_sample_valid.async_in                        1         1                                   1
+     1 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     1 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     2 \__pi_clk_dsp                                                    0         0                                   0
+     2 \__pi_rst_n                                                      1         1                                   1
+     2 \__pi_sample_valid                                               1         1                                   1
+     2 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     2 \__po_result_valid__assert.in_gate                               1         1                                   1
+     2 \__po_result_valid__assert.in_gold                               1         1                                   1
+     2 \__po_result_valid__assert.okay                                  1         1                                   1
+     2 \__po_result_valid__gate                                         1         1                                   1
+     2 \__po_result_valid__gold                                         1         1                                   1
+     2 \gate.__pi_clk_dsp                                               0         0                                   0
+     2 \gate.__pi_rst_n                                                 1         1                                   1
+     2 \gate.__pi_sample_valid                                          1         1                                   1
+     2 \gate.__po_result_valid                                          1         1                                   1
+     2 \gate.clk_dsp                                                    0         0                                   0
+     2 \gate.result_valid                                               1         1                                   1
+     2 \gate.rst_n                                                      1         1                                   1
+     2 \gate.rst_n_dsp                                                  1         1                                   1
+     2 \gate.sample_valid                                               1         1                                   1
+     2 \gate.u_div50.clk_in                                             0         0                                   0
+     2 \gate.u_div50.rst_n                                              1         1                                   1
+     2 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     2 \gate.u_rst_dsp.clk                                              0         0                                   0
+     2 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     2 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     2 \gate.u_sync_sample_valid.async_in                               1         1                                   1
+     2 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     2 \gate.valid_stage0                                               1         1                                   1
+     2 \gate.valid_stage1                                               0         0                                   0
+     2 \gold.__pi_clk_dsp                                               0         0                                   0
+     2 \gold.__pi_rst_n                                                 1         1                                   1
+     2 \gold.__pi_sample_valid                                          1         1                                   1
+     2 \gold.__po_result_valid                                          1         1                                   1
+     2 \gold.clk_dsp                                                    0         0                                   0
+     2 \gold.result_valid                                               1         1                                   1
+     2 \gold.result_valid_inner                                         0         0                                   0
+     2 \gold.rst_n                                                      1         1                                   1
+     2 \gold.sample_valid                                               1         1                                   1
+     2 \gold.u_gold.clk_dsp                                             0         0                                   0
+     2 \gold.u_gold.result_valid                                        0         0                                   0
+     2 \gold.u_gold.rst_n                                               1         1                                   1
+     2 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     2 \gold.u_gold.sample_valid                                        1         1                                   1
+     2 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     2 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     2 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.async_in                        1         1                                   1
+     2 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     2 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     3 \__pi_clk_dsp                                                    0         0                                   0
+     3 \__pi_rst_n                                                      1         1                                   1
+     3 \__pi_sample_valid                                               0         0                                   0
+     3 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     3 \__po_result_valid__assert.in_gate                               0         0                                   0
+     3 \__po_result_valid__assert.in_gold                               0         0                                   0
+     3 \__po_result_valid__assert.okay                                  1         1                                   1
+     3 \__po_result_valid__gate                                         0         0                                   0
+     3 \__po_result_valid__gold                                         0         0                                   0
+     3 \gate.__pi_clk_dsp                                               0         0                                   0
+     3 \gate.__pi_rst_n                                                 1         1                                   1
+     3 \gate.__pi_sample_valid                                          0         0                                   0
+     3 \gate.__po_result_valid                                          0         0                                   0
+     3 \gate.clk_dsp                                                    0         0                                   0
+     3 \gate.result_valid                                               0         0                                   0
+     3 \gate.rst_n                                                      1         1                                   1
+     3 \gate.rst_n_dsp                                                  1         1                                   1
+     3 \gate.sample_valid                                               0         0                                   0
+     3 \gate.u_div50.clk_in                                             0         0                                   0
+     3 \gate.u_div50.rst_n                                              1         1                                   1
+     3 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     3 \gate.u_rst_dsp.clk                                              0         0                                   0
+     3 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     3 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     3 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     3 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     3 \gate.valid_stage0                                               1         1                                   1
+     3 \gate.valid_stage1                                               1         1                                   1
+     3 \gold.__pi_clk_dsp                                               0         0                                   0
+     3 \gold.__pi_rst_n                                                 1         1                                   1
+     3 \gold.__pi_sample_valid                                          0         0                                   0
+     3 \gold.__po_result_valid                                          0         0                                   0
+     3 \gold.clk_dsp                                                    0         0                                   0
+     3 \gold.result_valid                                               0         0                                   0
+     3 \gold.result_valid_inner                                         0         0                                   0
+     3 \gold.rst_n                                                      1         1                                   1
+     3 \gold.sample_valid                                               0         0                                   0
+     3 \gold.u_gold.clk_dsp                                             0         0                                   0
+     3 \gold.u_gold.result_valid                                        0         0                                   0
+     3 \gold.u_gold.rst_n                                               1         1                                   1
+     3 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     3 \gold.u_gold.sample_valid                                        0         0                                   0
+     3 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     3 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     3 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     3 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     3 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     3 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     4 \__pi_clk_dsp                                                    0         0                                   0
+     4 \__pi_rst_n                                                      1         1                                   1
+     4 \__pi_sample_valid                                               0         0                                   0
+     4 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     4 \__po_result_valid__assert.in_gate                               1         1                                   1
+     4 \__po_result_valid__assert.in_gold                               0         0                                   0
+     4 \__po_result_valid__assert.okay                                  0         0                                   0
+     4 \__po_result_valid__gate                                         1         1                                   1
+     4 \__po_result_valid__gold                                         0         0                                   0
+     4 \gate.__pi_clk_dsp                                               0         0                                   0
+     4 \gate.__pi_rst_n                                                 1         1                                   1
+     4 \gate.__pi_sample_valid                                          0         0                                   0
+     4 \gate.__po_result_valid                                          1         1                                   1
+     4 \gate.clk_dsp                                                    0         0                                   0
+     4 \gate.result_valid                                               1         1                                   1
+     4 \gate.rst_n                                                      1         1                                   1
+     4 \gate.rst_n_dsp                                                  1         1                                   1
+     4 \gate.sample_valid                                               0         0                                   0
+     4 \gate.u_div50.clk_in                                             0         0                                   0
+     4 \gate.u_div50.rst_n                                              1         1                                   1
+     4 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     4 \gate.u_rst_dsp.clk                                              0         0                                   0
+     4 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     4 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     4 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     4 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     4 \gate.valid_stage0                                               0         0                                   0
+     4 \gate.valid_stage1                                               1         1                                   1
+     4 \gold.__pi_clk_dsp                                               0         0                                   0
+     4 \gold.__pi_rst_n                                                 1         1                                   1
+     4 \gold.__pi_sample_valid                                          0         0                                   0
+     4 \gold.__po_result_valid                                          0         0                                   0
+     4 \gold.clk_dsp                                                    0         0                                   0
+     4 \gold.result_valid                                               0         0                                   0
+     4 \gold.result_valid_inner                                         0         0                                   0
+     4 \gold.rst_n                                                      1         1                                   1
+     4 \gold.sample_valid                                               0         0                                   0
+     4 \gold.u_gold.clk_dsp                                             0         0                                   0
+     4 \gold.u_gold.result_valid                                        0         0                                   0
+     4 \gold.u_gold.rst_n                                               1         1                                   1
+     4 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     4 \gold.u_gold.sample_valid                                        0         0                                   0
+     4 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     4 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     4 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     4 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     4 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     4 \gold.u_gold.valid_stage1                                        0         0                                   0
+
+** Trying induction with length 4 **
+
+Setting up time step 4:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[base case 4] Solving problem with 2838 variables and 7736 clauses..
+Base case for induction length 4 proven.
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[induction step 4] Solving problem with 3689 variables and 10099 clauses..
+Induction step failed. Incrementing induction length.
+
+  Time Signal Name                                                    Dec       Hex                                 Bin
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+  init $flatten\gate.$auto$async2sync.cc:228:execute$779                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$781                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$783                0         0                                   0
+  init $flatten\gate.$auto$async2sync.cc:228:execute$785                1         1                                   1
+  init $flatten\gate.$auto$async2sync.cc:228:execute$787                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$789                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$791                0         0                                   0
+  init $flatten\gold.$auto$async2sync.cc:228:execute$793                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$795                1         1                                   1
+  init $flatten\gold.$auto$async2sync.cc:228:execute$797                1         1                                   1
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     1 \__pi_clk_dsp                                                    0         0                                   0
+     1 \__pi_rst_n                                                      1         1                                   1
+     1 \__pi_sample_valid                                               0         0                                   0
+     1 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     1 \__po_result_valid__assert.in_gate                               0         0                                   0
+     1 \__po_result_valid__assert.in_gold                               0         0                                   0
+     1 \__po_result_valid__assert.okay                                  1         1                                   1
+     1 \__po_result_valid__gate                                         0         0                                   0
+     1 \__po_result_valid__gold                                         0         0                                   0
+     1 \gate.__pi_clk_dsp                                               0         0                                   0
+     1 \gate.__pi_rst_n                                                 1         1                                   1
+     1 \gate.__pi_sample_valid                                          0         0                                   0
+     1 \gate.__po_result_valid                                          0         0                                   0
+     1 \gate.clk_dsp                                                    0         0                                   0
+     1 \gate.result_valid                                               0         0                                   0
+     1 \gate.rst_n                                                      1         1                                   1
+     1 \gate.rst_n_dsp                                                  1         1                                   1
+     1 \gate.sample_valid                                               0         0                                   0
+     1 \gate.u_div50.clk_in                                             0         0                                   0
+     1 \gate.u_div50.rst_n                                              1         1                                   1
+     1 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     1 \gate.u_rst_dsp.clk                                              0         0                                   0
+     1 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     1 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     1 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     1 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     1 \gate.valid_stage0                                               0         0                                   0
+     1 \gate.valid_stage1                                               1         1                                   1
+     1 \gold.__pi_clk_dsp                                               0         0                                   0
+     1 \gold.__pi_rst_n                                                 1         1                                   1
+     1 \gold.__pi_sample_valid                                          0         0                                   0
+     1 \gold.__po_result_valid                                          0         0                                   0
+     1 \gold.clk_dsp                                                    0         0                                   0
+     1 \gold.result_valid                                               0         0                                   0
+     1 \gold.result_valid_inner                                         1         1                                   1
+     1 \gold.rst_n                                                      1         1                                   1
+     1 \gold.sample_valid                                               0         0                                   0
+     1 \gold.u_gold.clk_dsp                                             0         0                                   0
+     1 \gold.u_gold.result_valid                                        1         1                                   1
+     1 \gold.u_gold.rst_n                                               1         1                                   1
+     1 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     1 \gold.u_gold.sample_valid                                        0         0                                   0
+     1 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     1 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     1 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.rst_ff1                                   0         0                                   0
+     1 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     1 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     1 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     1 \gold.u_gold.valid_stage1                                        1         1                                   1
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     2 \__pi_clk_dsp                                                    0         0                                   0
+     2 \__pi_rst_n                                                      1         1                                   1
+     2 \__pi_sample_valid                                               1         1                                   1
+     2 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     2 \__po_result_valid__assert.in_gate                               1         1                                   1
+     2 \__po_result_valid__assert.in_gold                               1         1                                   1
+     2 \__po_result_valid__assert.okay                                  1         1                                   1
+     2 \__po_result_valid__gate                                         1         1                                   1
+     2 \__po_result_valid__gold                                         1         1                                   1
+     2 \gate.__pi_clk_dsp                                               0         0                                   0
+     2 \gate.__pi_rst_n                                                 1         1                                   1
+     2 \gate.__pi_sample_valid                                          1         1                                   1
+     2 \gate.__po_result_valid                                          1         1                                   1
+     2 \gate.clk_dsp                                                    0         0                                   0
+     2 \gate.result_valid                                               1         1                                   1
+     2 \gate.rst_n                                                      1         1                                   1
+     2 \gate.rst_n_dsp                                                  1         1                                   1
+     2 \gate.sample_valid                                               1         1                                   1
+     2 \gate.u_div50.clk_in                                             0         0                                   0
+     2 \gate.u_div50.rst_n                                              1         1                                   1
+     2 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     2 \gate.u_rst_dsp.clk                                              0         0                                   0
+     2 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     2 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     2 \gate.u_sync_sample_valid.async_in                               1         1                                   1
+     2 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     2 \gate.valid_stage0                                               0         0                                   0
+     2 \gate.valid_stage1                                               0         0                                   0
+     2 \gold.__pi_clk_dsp                                               0         0                                   0
+     2 \gold.__pi_rst_n                                                 1         1                                   1
+     2 \gold.__pi_sample_valid                                          1         1                                   1
+     2 \gold.__po_result_valid                                          1         1                                   1
+     2 \gold.clk_dsp                                                    0         0                                   0
+     2 \gold.result_valid                                               1         1                                   1
+     2 \gold.result_valid_inner                                         0         0                                   0
+     2 \gold.rst_n                                                      1         1                                   1
+     2 \gold.sample_valid                                               1         1                                   1
+     2 \gold.u_gold.clk_dsp                                             0         0                                   0
+     2 \gold.u_gold.result_valid                                        0         0                                   0
+     2 \gold.u_gold.rst_n                                               1         1                                   1
+     2 \gold.u_gold.rst_n_dsp                                           0         0                                   0
+     2 \gold.u_gold.sample_valid                                        1         1                                   1
+     2 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     2 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     2 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     2 \gold.u_gold.u_rst_dsp.sync_rst_n                                0         0                                   0
+     2 \gold.u_gold.u_sync_sample_valid.async_in                        1         1                                   1
+     2 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     2 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     3 \__pi_clk_dsp                                                    0         0                                   0
+     3 \__pi_rst_n                                                      1         1                                   1
+     3 \__pi_sample_valid                                               1         1                                   1
+     3 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     3 \__po_result_valid__assert.in_gate                               0         0                                   0
+     3 \__po_result_valid__assert.in_gold                               0         0                                   0
+     3 \__po_result_valid__assert.okay                                  1         1                                   1
+     3 \__po_result_valid__gate                                         0         0                                   0
+     3 \__po_result_valid__gold                                         0         0                                   0
+     3 \gate.__pi_clk_dsp                                               0         0                                   0
+     3 \gate.__pi_rst_n                                                 1         1                                   1
+     3 \gate.__pi_sample_valid                                          1         1                                   1
+     3 \gate.__po_result_valid                                          0         0                                   0
+     3 \gate.clk_dsp                                                    0         0                                   0
+     3 \gate.result_valid                                               0         0                                   0
+     3 \gate.rst_n                                                      1         1                                   1
+     3 \gate.rst_n_dsp                                                  1         1                                   1
+     3 \gate.sample_valid                                               1         1                                   1
+     3 \gate.u_div50.clk_in                                             0         0                                   0
+     3 \gate.u_div50.rst_n                                              1         1                                   1
+     3 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     3 \gate.u_rst_dsp.clk                                              0         0                                   0
+     3 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     3 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     3 \gate.u_sync_sample_valid.async_in                               1         1                                   1
+     3 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     3 \gate.valid_stage0                                               1         1                                   1
+     3 \gate.valid_stage1                                               0         0                                   0
+     3 \gold.__pi_clk_dsp                                               0         0                                   0
+     3 \gold.__pi_rst_n                                                 1         1                                   1
+     3 \gold.__pi_sample_valid                                          1         1                                   1
+     3 \gold.__po_result_valid                                          0         0                                   0
+     3 \gold.clk_dsp                                                    0         0                                   0
+     3 \gold.result_valid                                               0         0                                   0
+     3 \gold.result_valid_inner                                         0         0                                   0
+     3 \gold.rst_n                                                      1         1                                   1
+     3 \gold.sample_valid                                               1         1                                   1
+     3 \gold.u_gold.clk_dsp                                             0         0                                   0
+     3 \gold.u_gold.result_valid                                        0         0                                   0
+     3 \gold.u_gold.rst_n                                               1         1                                   1
+     3 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     3 \gold.u_gold.sample_valid                                        1         1                                   1
+     3 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     3 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     3 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     3 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     3 \gold.u_gold.u_sync_sample_valid.async_in                        1         1                                   1
+     3 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     3 \gold.u_gold.valid_stage1                                        0         0                                   0
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     4 \__pi_clk_dsp                                                    0         0                                   0
+     4 \__pi_rst_n                                                      1         1                                   1
+     4 \__pi_sample_valid                                               0         0                                   0
+     4 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     4 \__po_result_valid__assert.in_gate                               0         0                                   0
+     4 \__po_result_valid__assert.in_gold                               0         0                                   0
+     4 \__po_result_valid__assert.okay                                  1         1                                   1
+     4 \__po_result_valid__gate                                         0         0                                   0
+     4 \__po_result_valid__gold                                         0         0                                   0
+     4 \gate.__pi_clk_dsp                                               0         0                                   0
+     4 \gate.__pi_rst_n                                                 1         1                                   1
+     4 \gate.__pi_sample_valid                                          0         0                                   0
+     4 \gate.__po_result_valid                                          0         0                                   0
+     4 \gate.clk_dsp                                                    0         0                                   0
+     4 \gate.result_valid                                               0         0                                   0
+     4 \gate.rst_n                                                      1         1                                   1
+     4 \gate.rst_n_dsp                                                  1         1                                   1
+     4 \gate.sample_valid                                               0         0                                   0
+     4 \gate.u_div50.clk_in                                             0         0                                   0
+     4 \gate.u_div50.rst_n                                              1         1                                   1
+     4 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     4 \gate.u_rst_dsp.clk                                              0         0                                   0
+     4 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     4 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     4 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     4 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     4 \gate.valid_stage0                                               1         1                                   1
+     4 \gate.valid_stage1                                               1         1                                   1
+     4 \gold.__pi_clk_dsp                                               0         0                                   0
+     4 \gold.__pi_rst_n                                                 1         1                                   1
+     4 \gold.__pi_sample_valid                                          0         0                                   0
+     4 \gold.__po_result_valid                                          0         0                                   0
+     4 \gold.clk_dsp                                                    0         0                                   0
+     4 \gold.result_valid                                               0         0                                   0
+     4 \gold.result_valid_inner                                         0         0                                   0
+     4 \gold.rst_n                                                      1         1                                   1
+     4 \gold.sample_valid                                               0         0                                   0
+     4 \gold.u_gold.clk_dsp                                             0         0                                   0
+     4 \gold.u_gold.result_valid                                        0         0                                   0
+     4 \gold.u_gold.rst_n                                               1         1                                   1
+     4 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     4 \gold.u_gold.sample_valid                                        0         0                                   0
+     4 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     4 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     4 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     4 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     4 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     4 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     4 \gold.u_gold.valid_stage1                                        1         1                                   1
+  ---- ------------------------------------------------------ ----------- --------- -----------------------------------
+     5 \__pi_clk_dsp                                                    0         0                                   0
+     5 \__pi_rst_n                                                      1         1                                   1
+     5 \__pi_sample_valid                                               0         0                                   0
+     5 \__po_result_valid__assert.i                                     1         1    00000000000000000000000000000001
+     5 \__po_result_valid__assert.in_gate                               1         1                                   1
+     5 \__po_result_valid__assert.in_gold                               0         0                                   0
+     5 \__po_result_valid__assert.okay                                  0         0                                   0
+     5 \__po_result_valid__gate                                         1         1                                   1
+     5 \__po_result_valid__gold                                         0         0                                   0
+     5 \gate.__pi_clk_dsp                                               0         0                                   0
+     5 \gate.__pi_rst_n                                                 1         1                                   1
+     5 \gate.__pi_sample_valid                                          0         0                                   0
+     5 \gate.__po_result_valid                                          1         1                                   1
+     5 \gate.clk_dsp                                                    0         0                                   0
+     5 \gate.result_valid                                               1         1                                   1
+     5 \gate.rst_n                                                      1         1                                   1
+     5 \gate.rst_n_dsp                                                  1         1                                   1
+     5 \gate.sample_valid                                               0         0                                   0
+     5 \gate.u_div50.clk_in                                             0         0                                   0
+     5 \gate.u_div50.rst_n                                              1         1                                   1
+     5 \gate.u_rst_dsp.async_rst_n                                      1         1                                   1
+     5 \gate.u_rst_dsp.clk                                              0         0                                   0
+     5 \gate.u_rst_dsp.rst_ff1                                          1         1                                   1
+     5 \gate.u_rst_dsp.sync_rst_n                                       1         1                                   1
+     5 \gate.u_sync_sample_valid.async_in                               0         0                                   0
+     5 \gate.u_sync_sample_valid.rst_n                                  1         1                                   1
+     5 \gate.valid_stage0                                               0         0                                   0
+     5 \gate.valid_stage1                                               1         1                                   1
+     5 \gold.__pi_clk_dsp                                               0         0                                   0
+     5 \gold.__pi_rst_n                                                 1         1                                   1
+     5 \gold.__pi_sample_valid                                          0         0                                   0
+     5 \gold.__po_result_valid                                          0         0                                   0
+     5 \gold.clk_dsp                                                    0         0                                   0
+     5 \gold.result_valid                                               0         0                                   0
+     5 \gold.result_valid_inner                                         1         1                                   1
+     5 \gold.rst_n                                                      1         1                                   1
+     5 \gold.sample_valid                                               0         0                                   0
+     5 \gold.u_gold.clk_dsp                                             0         0                                   0
+     5 \gold.u_gold.result_valid                                        1         1                                   1
+     5 \gold.u_gold.rst_n                                               1         1                                   1
+     5 \gold.u_gold.rst_n_dsp                                           1         1                                   1
+     5 \gold.u_gold.sample_valid                                        0         0                                   0
+     5 \gold.u_gold.u_div50.clk_in                                      0         0                                   0
+     5 \gold.u_gold.u_div50.rst_n                                       1         1                                   1
+     5 \gold.u_gold.u_rst_dsp.async_rst_n                               1         1                                   1
+     5 \gold.u_gold.u_rst_dsp.clk                                       0         0                                   0
+     5 \gold.u_gold.u_rst_dsp.rst_ff1                                   1         1                                   1
+     5 \gold.u_gold.u_rst_dsp.sync_rst_n                                1         1                                   1
+     5 \gold.u_gold.u_sync_sample_valid.async_in                        0         0                                   0
+     5 \gold.u_gold.u_sync_sample_valid.rst_n                           1         1                                   1
+     5 \gold.u_gold.valid_stage1                                        0         0                                   0
+
+** Trying induction with length 5 **
+
+Setting up time step 5:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[base case 5] Solving problem with 3743 variables and 10277 clauses..
+Base case for induction length 5 proven.
+
+Setting up time step 6:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_sample_valid
+Import def constraint for this timestep: \__pi_rst_n
+Import def constraint for this timestep: \__pi_clk_dsp
+Imported 37 cells to SAT database.
+Import proof for assert: \__po_result_valid__assert.okay when 1'1.
+Import show expression: \__pi_clk_dsp
+Import show expression: \__pi_rst_n
+Import show expression: \__pi_sample_valid
+Import show expression: \__po_result_valid__assert.i
+Import show expression: \__po_result_valid__assert.in_gate
+Import show expression: \__po_result_valid__assert.in_gold
+Import show expression: \__po_result_valid__assert.okay
+Import show expression: \__po_result_valid__gate
+Import show expression: \__po_result_valid__gold
+Import show expression: \gate.__pi_clk_dsp
+Import show expression: \gate.__pi_rst_n
+Import show expression: \gate.__pi_sample_valid
+Import show expression: \gate.__po_result_valid
+Import show expression: \gate.clk_dsp
+Import show expression: \gate.result_valid
+Import show expression: \gate.rst_n
+Import show expression: \gate.rst_n_dsp
+Import show expression: \gate.sample_valid
+Import show expression: \gate.u_div50.clk_in
+Import show expression: \gate.u_div50.rst_n
+Import show expression: \gate.u_rst_dsp.async_rst_n
+Import show expression: \gate.u_rst_dsp.clk
+Import show expression: \gate.u_rst_dsp.rst_ff1
+Import show expression: \gate.u_rst_dsp.sync_rst_n
+Import show expression: \gate.u_sync_sample_valid.async_in
+Import show expression: \gate.u_sync_sample_valid.rst_n
+Import show expression: \gate.valid_stage0
+Import show expression: \gate.valid_stage1
+Import show expression: \gold.__pi_clk_dsp
+Import show expression: \gold.__pi_rst_n
+Import show expression: \gold.__pi_sample_valid
+Import show expression: \gold.__po_result_valid
+Import show expression: \gold.clk_dsp
+Import show expression: \gold.result_valid
+Import show expression: \gold.result_valid_inner
+Import show expression: \gold.rst_n
+Import show expression: \gold.sample_valid
+Import show expression: \gold.u_gold.clk_dsp
+Import show expression: \gold.u_gold.result_valid
+Import show expression: \gold.u_gold.rst_n
+Import show expression: \gold.u_gold.rst_n_dsp
+Import show expression: \gold.u_gold.sample_valid
+Import show expression: \gold.u_gold.u_div50.clk_in
+Import show expression: \gold.u_gold.u_div50.rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.async_rst_n
+Import show expression: \gold.u_gold.u_rst_dsp.clk
+Import show expression: \gold.u_gold.u_rst_dsp.rst_ff1
+Import show expression: \gold.u_gold.u_rst_dsp.sync_rst_n
+Import show expression: \gold.u_gold.u_sync_sample_valid.async_in
+Import show expression: \gold.u_gold.u_sync_sample_valid.rst_n
+Import show expression: \gold.u_gold.valid_stage1
+
+[induction step 5] Solving problem with 4686 variables and 12924 clauses..
+Induction step proven: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 0fb91b9a76, CPU: user 0.05s system 0.00s, MEM: 18.00 MB peak
+Yosys 0.47+121 (git sha1 98b4affc4, clang++ 18.1.8 -fPIC -O3)
+Time spent: 85% 1x sat (0 sec), 4% 2x opt_expr (0 sec), ...

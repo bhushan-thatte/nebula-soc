@@ -1,0 +1,23 @@
+[gold]
+read_verilog -sv domain_c_dsp_fir_gold.v
+read_verilog -sv domain_c_dsp_fir_gold_delayed.v
+read_verilog -sv clk_divider.v
+read_verilog -sv reset_sync.v
+read_verilog -sv sync_2ff.v
+prep -top domain_c_dsp_fir_gate
+
+[gate]
+read_verilog -sv domain_c_dsp_fir_gate.v
+read_verilog -sv clk_divider.v
+read_verilog -sv reset_sync.v
+read_verilog -sv sync_2ff.v
+prep -top domain_c_dsp_fir_gate
+
+[strategy sat]
+use sat
+depth 8
+
+[strategy sby]
+use sby
+depth 8
+engine smtbmc bitwuzla

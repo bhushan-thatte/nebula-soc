@@ -1,2 +1,3 @@
 __pycache__/
 *.pyc
+formal_verify/fir_equiv/
