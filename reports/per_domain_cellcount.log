@@ -1,0 +1,10 @@
+=== domain_a_cmd_fsm ===
+       55 cells
+=== domain_b_mem_ctrl ===
+     1901 cells
+=== domain_c_dsp_fir ===
+     4360 cells
+=== domain_d_axi_bridge ===
+     1753 cells
+=== domain_e_uart_spi ===
+       93 cells
