@@ -1,0 +1,127 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+
+-- Executing script file `/tmp/final_verified_cellcount.tcl' --
+
+1. Executing Verilog-2005 frontend: ./results/sky130hd/nebula_soc_top/base/1_2_yosys.v
+Parsing Verilog input from `./results/sky130hd/nebula_soc_top/base/1_2_yosys.v' to AST representation.
+Generating RTLIL representation for module `\nebula_soc_top'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \nebula_soc_top
+
+2.2. Analyzing design hierarchy..
+Top module:  \nebula_soc_top
+Removed 0 unused modules.
+
+3. Printing statistics.
+
+=== nebula_soc_top ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     4662 wires
+     4670 wire bits
+     4662 public wires
+     4670 public wire bits
+       10 ports
+       18 port bits
+     4283 cells
+        1   sky130_fd_sc_hd__a2111o_1
+        3   sky130_fd_sc_hd__a2111oi_0
+        3   sky130_fd_sc_hd__a2111oi_2
+        2   sky130_fd_sc_hd__a211o_1
+       21   sky130_fd_sc_hd__a211oi_1
+        6   sky130_fd_sc_hd__a21boi_0
+       60   sky130_fd_sc_hd__a21o_1
+      188   sky130_fd_sc_hd__a21oi_1
+        4   sky130_fd_sc_hd__a221o_1
+       51   sky130_fd_sc_hd__a221oi_1
+       43   sky130_fd_sc_hd__a222oi_1
+       31   sky130_fd_sc_hd__a22o_1
+       71   sky130_fd_sc_hd__a22oi_1
+        1   sky130_fd_sc_hd__a311o_1
+       10   sky130_fd_sc_hd__a311oi_1
+        2   sky130_fd_sc_hd__a31o_2
+       37   sky130_fd_sc_hd__a31oi_1
+        1   sky130_fd_sc_hd__a32o_1
+       10   sky130_fd_sc_hd__a32oi_1
+        1   sky130_fd_sc_hd__a41o_1
+        7   sky130_fd_sc_hd__a41oi_1
+        6   sky130_fd_sc_hd__and2_1
+       28   sky130_fd_sc_hd__and3_1
+        2   sky130_fd_sc_hd__and3b_1
+       12   sky130_fd_sc_hd__and4_1
+       24   sky130_fd_sc_hd__buf_1
+       33   sky130_fd_sc_hd__buf_2
+        8   sky130_fd_sc_hd__buf_4
+        4   sky130_fd_sc_hd__buf_6
+      111   sky130_fd_sc_hd__clkbuf_1
+        3   sky130_fd_sc_hd__clkinv_1
+        2   sky130_fd_sc_hd__conb_1
+      678   sky130_fd_sc_hd__dfrtp_1
+       10   sky130_fd_sc_hd__dfstp_2
+      648   sky130_fd_sc_hd__edfxtp_1
+       63   sky130_fd_sc_hd__fa_1
+      318   sky130_fd_sc_hd__ha_1
+      106   sky130_fd_sc_hd__inv_1
+      214   sky130_fd_sc_hd__mux2_2
+       42   sky130_fd_sc_hd__mux2i_1
+       10   sky130_fd_sc_hd__mux4_2
+      294   sky130_fd_sc_hd__nand2_1
+        1   sky130_fd_sc_hd__nand2_2
+       19   sky130_fd_sc_hd__nand2b_1
+       87   sky130_fd_sc_hd__nand3_1
+        5   sky130_fd_sc_hd__nand3b_1
+       23   sky130_fd_sc_hd__nand4_1
+        1   sky130_fd_sc_hd__nand4b_1
+      153   sky130_fd_sc_hd__nor2_1
+        1   sky130_fd_sc_hd__nor2_2
+       27   sky130_fd_sc_hd__nor2b_1
+       87   sky130_fd_sc_hd__nor3_1
+        1   sky130_fd_sc_hd__nor3_2
+        5   sky130_fd_sc_hd__nor3b_1
+       19   sky130_fd_sc_hd__nor4_1
+        1   sky130_fd_sc_hd__nor4b_1
+        3   sky130_fd_sc_hd__nor4b_2
+        4   sky130_fd_sc_hd__o2111ai_1
+       13   sky130_fd_sc_hd__o211ai_1
+        9   sky130_fd_sc_hd__o21a_1
+      174   sky130_fd_sc_hd__o21ai_0
+        3   sky130_fd_sc_hd__o21ai_1
+        1   sky130_fd_sc_hd__o21ai_2
+        1   sky130_fd_sc_hd__o21ba_2
+       33   sky130_fd_sc_hd__o21bai_1
+        1   sky130_fd_sc_hd__o21bai_4
+       10   sky130_fd_sc_hd__o221ai_1
+        8   sky130_fd_sc_hd__o22ai_1
+        2   sky130_fd_sc_hd__o2bb2ai_1
+        1   sky130_fd_sc_hd__o311a_1
+        3   sky130_fd_sc_hd__o311ai_0
+        1   sky130_fd_sc_hd__o31a_1
+        7   sky130_fd_sc_hd__o31ai_1
+        2   sky130_fd_sc_hd__o31ai_4
+        2   sky130_fd_sc_hd__o32ai_1
+        6   sky130_fd_sc_hd__o41ai_1
+        1   sky130_fd_sc_hd__o41ai_4
+        4   sky130_fd_sc_hd__or2_2
+       12   sky130_fd_sc_hd__or3_1
+        1   sky130_fd_sc_hd__or3b_2
+        4   sky130_fd_sc_hd__or4_1
+      251   sky130_fd_sc_hd__xnor2_1
+        2   sky130_fd_sc_hd__xnor2_2
+        5   sky130_fd_sc_hd__xnor3_1
+      119   sky130_fd_sc_hd__xor2_1
+        1   sky130_fd_sc_hd__xor3_1
+
+End of script. Logfile hash: 329291a978, time: 0.44s, user: 0.44s, system: 0.06s, MEM: 71.18 MB peak
+Yosys 0.67 (git sha1 2d1509d1b, Release, GNU /usr/local/bin/wrapped-cc/g++ 11.4.0)
+Time spent: 99% 2x read_verilog (0 sec), 0% 1x hierarchy (0 sec), ...
