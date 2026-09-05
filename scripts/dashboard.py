@@ -94,7 +94,7 @@ MILESTONES = [
 # Header
 # ---------------------------------------------------------------------------
 
-GITHUB_URL = "https://github.com/YOUR_ORG/nebula-soc"  # TODO: update once repo is created
+GITHUB_URL = "https://github.com/bhushan-thatte/nebula-soc"
 
 st.markdown(f"""
 <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
@@ -121,8 +121,8 @@ st.markdown(f"""
             </div>
         </a>
         <div style="color:#8B949E; font-size:12px; margin-top:10px;">
-            Team: <i>[Team Name]</i><br>
-            [Member 1] &middot; [Member 2] &middot; [Member 3]
+            Team: <i>ChipSmith</i><br>
+            Bhushan Thatte &middot; Saksham Tawakley &middot; Yash Kothari
         </div>
     </div>
 </div>
