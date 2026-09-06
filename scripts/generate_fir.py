@@ -76,9 +76,12 @@ def generate_fir(n, module_name="domain_c_dsp_fir"):
     lines.append("    );")
     lines.append("")
 
-    # Tap coefficients
+    # Tap coefficients, plus 8-bit hi/lo split constants for the
+    # two-stage multiply pipeline below.
     for i, t in enumerate(taps):
         lines.append(f"    localparam signed [15:0] TAP{i} = 16'sd{t};")
+        lines.append(f"    localparam [7:0] TAP{i}_HI = 8'd{(t >> 8) & 0xFF};")
+        lines.append(f"    localparam [7:0] TAP{i}_LO = 8'd{t & 0xFF};")
     lines.append("")
 
     # Delay line
@@ -97,15 +100,64 @@ def generate_fir(n, module_name="domain_c_dsp_fir"):
     lines.append("    end")
     lines.append("")
 
-    # Partial products (multiply)
-    lines.append("    // ---- Partial products ----")
+    # Two-stage multiply pipeline. Each tap's 16-bit constant is split into
+    # 8-bit hi/lo halves, so each partial multiply is a shallow 24x8 rather
+    # than a 24x16 -- avoiding the deep shift-add reduction tree that dense
+    # constants (e.g. long runs of 1 bits) produce. Stage A registers both
+    # half-multiplies; Stage B combines them (shift+add) into the final
+    # registered partial product, reg_p{i}, which the adder tree consumes
+    # exactly as before. This adds one extra cycle vs a single-stage
+    # multiply register, applied uniformly to every tap.
+    lines.append("    // ---- Multiply pipeline Stage A: half-width partial products ----")
     for i in range(n):
-        lines.append(f"    wire signed [39:0] p{i} = delay[{i}] * TAP{i};")
+        lines.append(f"    wire signed [31:0] p_hi{i} = delay[{i}] * TAP{i}_HI;")
+        lines.append(f"    wire signed [31:0] p_lo{i} = delay[{i}] * TAP{i}_LO;")
+    lines.append("")
+    reg_half_names = []
+    for i in range(n):
+        reg_half_names.append(f"reg_p_hi{i}")
+        reg_half_names.append(f"reg_p_lo{i}")
+    lines.append("    reg signed [31:0] " + ", ".join(reg_half_names) + ";")
+    lines.append("    reg valid_stage0a;")
+    lines.append("")
+    lines.append("    always @(posedge clk_dsp or negedge rst_n_dsp) begin")
+    lines.append("        if (!rst_n_dsp) begin")
+    for rn in reg_half_names:
+        lines.append(f"            {rn} <= 32'sd0;")
+    lines.append("            valid_stage0a <= 1'b0;")
+    lines.append("        end else begin")
+    for i in range(n):
+        lines.append(f"            reg_p_hi{i} <= p_hi{i};")
+        lines.append(f"            reg_p_lo{i} <= p_lo{i};")
+    lines.append("            valid_stage0a <= sample_valid;")
+    lines.append("        end")
+    lines.append("    end")
+    lines.append("")
+
+    lines.append("    // ---- Multiply pipeline Stage B: combine halves, register final product ----")
+    for i in range(n):
+        lines.append(f"    wire signed [39:0] p{i} = (reg_p_hi{i} <<< 8) + reg_p_lo{i};")
+    lines.append("")
+    reg_p_names = [f"reg_p{i}" for i in range(n)]
+    lines.append("    reg signed [39:0] " + ", ".join(reg_p_names) + ";")
+    lines.append("    reg valid_stage0;")
+    lines.append("")
+    lines.append("    always @(posedge clk_dsp or negedge rst_n_dsp) begin")
+    lines.append("        if (!rst_n_dsp) begin")
+    for rn in reg_p_names:
+        lines.append(f"            {rn} <= 40'sd0;")
+    lines.append("            valid_stage0 <= 1'b0;")
+    lines.append("        end else begin")
+    for i, rn in enumerate(reg_p_names):
+        lines.append(f"            {rn} <= p{i};")
+    lines.append("            valid_stage0 <= valid_stage0a;")
+    lines.append("        end")
+    lines.append("    end")
     lines.append("")
 
     # Build the pipelined adder tree, level by level
     cur_width = 40
-    cur_names = [f"p{i}" for i in range(n)]
+    cur_names = [f"reg_p{i}" for i in range(n)]
 
     for level in range(1, levels + 1):
         next_width = cur_width + 1
@@ -134,7 +186,7 @@ def generate_fir(n, module_name="domain_c_dsp_fir"):
         lines.append("        end else begin")
         for rn, sn in zip(reg_names, sum_names):
             lines.append(f"            {rn} <= {sn};")
-        prev_valid = "sample_valid" if level == 1 else f"valid_stage{level-1}"
+        prev_valid = "valid_stage0" if level == 1 else f"valid_stage{level-1}"
         lines.append(f"            valid_stage{level} <= {prev_valid};")
         lines.append("        end")
         lines.append("    end")
