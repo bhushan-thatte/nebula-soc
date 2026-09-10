@@ -75,9 +75,47 @@ def load_genai_suggestions():
         return json.load(f)
 
 
+@st.cache_data
+def load_design_area():
+    """Parse the real 'Design area NNNNN um^2 ...' line directly from the
+    authoritative synthesis log, rather than hardcoding the figure."""
+    import re
+    path = REPORTS_DIR / "synth_full_log_milestone4_final.log"
+    if not path.exists():
+        return None
+    with open(path) as f:
+        text = f.read()
+    match = re.search(r"Design area (\d+) um\^2", text)
+    if not match:
+        return None
+    return int(match.group(1))
+
+
 m3 = load_json("milestone3_final.json")
 m4 = load_json("milestone4_v1.json")
 genai = load_genai_suggestions()
+M4_AREA = load_design_area()
+
+# Compute real hero/KPI aggregates from the loaded JSON, rather than
+# hardcoding them as literal strings. Falls back to last-known values
+# (with a visible warning) only if the source files are genuinely missing.
+if m3 is not None and m4 is not None:
+    M3_WNS = min(v["wns"] for v in m3["group_summary"].values())
+    M3_TNS = round(sum(v["tns"] for v in m3["group_summary"].values()), 2)
+    M3_VIOL = sum(v["violating_endpoints"] for v in m3["group_summary"].values())
+    M4_WNS = min(v["wns"] for v in m4["group_summary"].values())
+    M4_TNS = round(sum(v["tns"] for v in m4["group_summary"].values()), 2)
+    M4_VIOL = sum(v["violating_endpoints"] for v in m4["group_summary"].values())
+else:
+    st.warning(
+        "milestone3_final.json / milestone4_v1.json not found -- "
+        "showing last-known verified values instead of live data."
+    )
+    M3_WNS, M3_TNS, M3_VIOL = -0.64, -4.58, 16
+    M4_WNS, M4_TNS, M4_VIOL = 0.55, 0.00, 0
+
+WNS_DELTA = round(M4_WNS - M3_WNS, 2)
+VIOL_DELTA = M4_VIOL - M3_VIOL
 
 # Milestone-level timing progression (hardcoded from verified, saved
 # reports -- baseline_timing_report.log and formal_verification/SUMMARY.md
@@ -152,10 +190,10 @@ with hero_col1:
             BEFORE &mdash; MILESTONE 3
         </div>
         <div style="font-size:42px; font-weight:800; margin-top:8px; color:white;">
-            -0.64 ns
+            {M3_WNS:.2f} ns
         </div>
         <div style="color:#8B949E; font-size:14px; margin-top:4px;">
-            Worst Negative Slack &middot; 16 violating endpoints &middot; TNS -4.58 ns
+            Worst Negative Slack &middot; {M3_VIOL} violating endpoints &middot; TNS {M3_TNS:.2f} ns
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -175,10 +213,10 @@ with hero_col2:
             AFTER &mdash; MILESTONE 4 (GenAI-fixed)
         </div>
         <div style="font-size:42px; font-weight:800; margin-top:8px; color:white;">
-            +0.55 ns
+            +{M4_WNS:.2f} ns
         </div>
         <div style="color:#8B949E; font-size:14px; margin-top:4px;">
-            Worst Negative Slack &middot; 0 violating endpoints &middot; TNS 0.00 ns
+            Worst Negative Slack &middot; {M4_VIOL} violating endpoints &middot; TNS {M4_TNS:.2f} ns
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -194,31 +232,37 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     st.metric(
         label="Worst Negative Slack (WNS)",
-        value="+0.55 ns",
-        delta="+1.19 ns vs pre-fix",
+        value=f"+{M4_WNS:.2f} ns",
+        delta=f"+{WNS_DELTA:.2f} ns vs pre-fix",
         delta_color="normal",
     )
 with col2:
     st.metric(
         label="Total Negative Slack (TNS)",
-        value="0.00 ns",
-        delta="100% closed",
+        value=f"{M4_TNS:.2f} ns",
+        delta="100% closed" if M4_TNS == 0 else f"{M4_TNS:.2f} ns remaining",
         delta_color="normal",
     )
 with col3:
     st.metric(
         label="Violating Endpoints",
-        value="0",
-        delta="-16 endpoints",
+        value=str(M4_VIOL),
+        delta=f"{VIOL_DELTA} endpoints",
         delta_color="normal",
     )
 with col4:
-    st.metric(
-        label="Design Area",
-        value="56,054 \u00b5m\u00b2",
-        delta="+4.4% (pipeline reg cost)",
-        delta_color="off",
-    )
+    if M4_AREA is not None:
+        st.metric(
+            label="Design Area",
+            value=f"{M4_AREA:,} \u00b5m\u00b2",
+        )
+        st.caption(
+            "Pre-fix (M3) area not independently re-measured; see "
+            "PPA_COMPARISON.md. Delta omitted rather than estimated."
+        )
+    else:
+        st.metric(label="Design Area", value="unavailable")
+        st.caption("synth_full_log_milestone4_final.log not found.")
 
 st.markdown("---")
 
@@ -490,6 +534,68 @@ with st.expander("Why is result_out a bounded proof, not unconditional?"):
     true reset state) passed cleanly for all 8 checked cycles, which fully
     covers the 3-stage pipeline fill transient plus 5 steady-state cycles.
     See `reports/formal_verification/SUMMARY.md` for the complete writeup.
+    """)
+
+st.markdown("---")
+
+# ---------------------------------------------------------------------------
+# Scaling to benchmark spec: second, fully-verified deliverable
+# ---------------------------------------------------------------------------
+
+st.header("Scaling to Benchmark Spec: 256-Tap FIR (~50K Cells)")
+
+st.markdown(
+    "The same GenAI-diagnosed pipelining principle, extended to a 256-tap "
+    "FIR filter to meet the hackathon's explicit ~50K standard-cell "
+    "benchmark target -- closing it fully, not just approaching it. See "
+    "`reports/SCALING_256TAP_CLOSURE.md` for the complete methodology."
+)
+
+# Real, saved final-state numbers from reports/256tap_final_cellcount.log
+# and reports/SCALING_256TAP_CLOSURE.md (not estimated or fabricated).
+SCALING_DELIVERABLES = [
+    {"name": "Primary (submitted) \u2014 M4", "cells": 4283, "area": 56054, "wns": 0.55, "tns": 0.00, "violations": 0},
+    {"name": "Secondary \u2014 256-tap (spec-scale)", "cells": 68510, "area": 802926, "wns": 0.03, "tns": 0.00, "violations": 0},
+]
+
+scale_cols = st.columns(2)
+for col, d in zip(scale_cols, SCALING_DELIVERABLES):
+    with col:
+        st.markdown(f"""
+        <div class="metric-card">
+            <div style="color:{ACCENT}; font-weight:700; font-size:13px; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">
+                {d['name']}
+            </div>
+            <div style="font-size:26px; font-weight:700; margin-bottom:4px;">{d['cells']:,} cells</div>
+            <div style="color:#8B949E; font-size:13px; margin-bottom:12px;">{d['area']:,} \u00b5m\u00b2</div>
+            <div style="display:flex; gap:20px;">
+                <div><div style="color:{ACCENT}; font-size:20px; font-weight:700;">+{d['wns']:.2f}ns</div><div style="color:#8B949E; font-size:11px;">WNS</div></div>
+                <div><div style="color:{ACCENT}; font-size:20px; font-weight:700;">{d['tns']:.2f}ns</div><div style="color:#8B949E; font-size:11px;">TNS</div></div>
+                <div><div style="color:{ACCENT}; font-size:20px; font-weight:700;">{d['violations']}</div><div style="color:#8B949E; font-size:11px;">Violations</div></div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+with st.expander("How the 256-tap version closed (and its honest caveat)"):
+    st.markdown("""
+    At 128 taps, synthesis revealed a residual violation traced to one tap's
+    constant-multiplier depth (TAP65 = 8064, a dense 6-bit run needing a
+    deeper shift-add tree than other taps) -- not the adder tree, which was
+    already pipelined. At 256 taps this widened to 13 endpoints, confirming
+    the pattern scales with tap count via unlucky constants.
+
+    **The fix:** every tap's 16-bit multiply was split into two 8-bit
+    half-width multiplies, each registered separately, then combined via
+    shift-add into the final registered partial product -- applied
+    uniformly to all 256 taps, not just the violating ones.
+
+    **Honest caveat:** +0.03ns is a thin margin next to the primary
+    design's +0.55ns. This result is measured at the synthesis stage with
+    an ideal clock network -- a placement-and-route-aware pass would
+    confirm it holds under real parasitics, and was attempted but blocked
+    by an ORFS/OpenROAD internal tooling issue (generated-clock net names
+    dropped during the synth-to-placement SDC handoff), unrelated to RTL
+    correctness. See `reports/SCALING_256TAP_CLOSURE.md` for full details.
     """)
 
 st.markdown("---")
