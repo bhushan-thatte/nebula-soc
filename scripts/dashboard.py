@@ -607,5 +607,6 @@ st.markdown("---")
 st.caption(
     "All data on this dashboard is sourced directly from committed project "
     "files (reports/*.json, reports/*.log). No numbers are estimated or "
-    "fabricated. Full reproduction instructions in reports/PPA_COMPARISON.md."
+    "fabricated. Full reproduction instructions in reports/PPA_COMPARISON.md "
+    "and reports/SCALING_256TAP_CLOSURE.md."
 )
