@@ -91,10 +91,34 @@ def load_design_area():
     return int(match.group(1))
 
 
+@st.cache_data
+def load_total_power(filename):
+    """Parse the 'Total' row's power figure directly from a report_power
+    dump (OpenSTA), rather than hardcoding it."""
+    import re
+    path = REPORTS_DIR / filename
+    if not path.exists():
+        return None
+    with open(path) as f:
+        text = f.read()
+    match = re.search(r"^Total\s+([\d.eE+-]+)\s+([\d.eE+-]+)\s+([\d.eE+-]+)\s+([\d.eE+-]+)\s+[\d.]+%", text, re.MULTILINE)
+    if not match:
+        return None
+    return float(match.group(4))  # total power in Watts
+
+
 m3 = load_json("milestone3_final.json")
 m4 = load_json("milestone4_v1.json")
 genai = load_genai_suggestions()
 M4_AREA = load_design_area()
+M3_POWER_W = load_total_power("m3_final_with_power.rpt")
+M4_POWER_W = load_total_power("m4_final_with_power.rpt")
+# M3 area (53,702 um^2) has no persisted log file to live-parse -- it was
+# confirmed via a fresh re-synthesis run in this project's development
+# session (see reports/PPA_COMPARISON.md) but only appeared in terminal
+# output, never saved to a committed file. Documented as a disclosed
+# constant rather than silently hardcoded.
+M3_AREA_DOCUMENTED = 53702
 
 # Compute real hero/KPI aggregates from the loaded JSON, rather than
 # hardcoding them as literal strings. Falls back to last-known values
@@ -227,7 +251,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 # Top-line KPIs
 # ---------------------------------------------------------------------------
 
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     st.metric(
@@ -252,17 +276,37 @@ with col3:
     )
 with col4:
     if M4_AREA is not None:
+        area_delta_pct = round((M4_AREA - M3_AREA_DOCUMENTED) / M3_AREA_DOCUMENTED * 100, 1)
         st.metric(
             label="Design Area",
             value=f"{M4_AREA:,} \u00b5m\u00b2",
+            delta=f"+{area_delta_pct}% vs pre-fix",
+            delta_color="off",
         )
         st.caption(
-            "Pre-fix (M3) area not independently re-measured; see "
-            "PPA_COMPARISON.md. Delta omitted rather than estimated."
+            "M3 area (53,702 \u00b5m\u00b2) independently re-confirmed via "
+            "fresh synthesis; see PPA_COMPARISON.md."
         )
     else:
         st.metric(label="Design Area", value="unavailable")
         st.caption("synth_full_log_milestone4_final.log not found.")
+
+with col5:
+    if M3_POWER_W is not None and M4_POWER_W is not None:
+        power_delta_pct = round((M4_POWER_W - M3_POWER_W) / M3_POWER_W * 100, 1)
+        st.metric(
+            label="Total Power",
+            value=f"{M4_POWER_W * 1000:.2f} mW",
+            delta=f"+{power_delta_pct}% vs pre-fix",
+            delta_color="off",
+        )
+        st.caption(
+            "OpenSTA report_power, default vectorless switching activity "
+            "-- standard estimation, not simulation-derived."
+        )
+    else:
+        st.metric(label="Total Power", value="unavailable")
+        st.caption("m3/m4_final_with_power.rpt not found.")
 
 st.markdown("---")
 
