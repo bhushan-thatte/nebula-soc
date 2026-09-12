@@ -6,8 +6,15 @@ This report documents the measured Power-Performance-Area impact of
 the GenAI-assisted timing closure applied to Domain C (16-tap FIR
 filter) of the Nebula multi-clock SoC benchmark. All numbers below are
 taken directly from real OpenSTA/OpenROAD synthesis runs against the
-real SKY130HD standard cell library (sky130_fd_sc_hd__tt_025C_1v80),
-not estimated or simulated.
+real SKY130HD standard cell library (sky130_fd_sc_hd__tt_025C_1v80).
+Timing and area are measured directly; power uses OpenSTA's standard
+vectorless switching-activity estimation (see the Power Comparison
+section for the exact caveat). All timing/power/area analysis in this
+report is performed at the synthesis stage with an ideal clock
+network -- single corner (TT, 25C, 1.8V), pre-placement and pre-route.
+This is standard practice for RTL-stage timing closure work but is
+not post-layout signoff-accurate timing; see Section 10 of the full
+report for the complete scope statement.
 
 ## Timing (Performance) Comparison
 
@@ -36,12 +43,34 @@ without disturbing timing elsewhere in the design.
 
 | Stage | Design Area (um^2) | Total Cells |
 |---|---|---|
-| Milestone 3 (before fix) | ~53,702 | (not independently re-measured; superseded by M4 methodology below) |
+| Milestone 3 (before fix) | 53,702 | 4,073 |
 | **Milestone 4 (after fix, final verified state)** | **56,054** | **4,283** |
 
-Area increased by ~4.4% (2,352 um^2) due to the added pipeline
-register stage (8 x 41-bit registers). This is the expected, minor
-cost of the timing fix -- a small area trade for full timing closure.
+Area increased by 4.4% (2,352 um^2) due to the added pipeline
+register stage. Cell count increased by 210 cells. Both M3 and M4
+area/cell figures are independently re-measured via fresh synthesis
+runs (not carried over from earlier, less-verified logs).
+
+## Power Comparison
+
+| Stage | Total Power (W) | Sequential | Combinational | Clock |
+|---|---|---|---|---|
+| Milestone 3 (before fix) | 9.88e-03 (9.88 mW) | 98.1% | 0.1% | 1.8% |
+| **Milestone 4 (after fix)** | **1.09e-02 (10.9 mW)** | **98.2%** | **0.1%** | **1.6%** |
+
+Power increased by 10.3%, proportionally more than the 4.4% area
+increase -- consistent with the added pipeline registers being
+switching (dynamic-power) elements, not just static area. Sequential
+logic dominates total power in both cases (~98%), which is expected
+for a design whose critical fix was adding registers, not
+restructuring combinational logic.
+
+**Caveat:** these figures use OpenSTA's default vectorless switching-
+activity assumptions (no real simulation/VCD-derived toggle rates).
+This is a standard estimation methodology for early-stage power
+analysis, not silicon-accurate power. Full methodology: run
+`report_power` after `read_sdc` in the same OpenSTA session used for
+timing (see Reproducing these results, below).
 
 ## Formal Verification
 
