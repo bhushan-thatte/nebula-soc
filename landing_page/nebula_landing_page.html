@@ -415,12 +415,14 @@
         <div class="metric-line"><span class="m-label">Worst negative slack</span><span class="m-value">-0.64 ns</span></div>
         <div class="metric-line"><span class="m-label">Total negative slack</span><span class="m-value">-4.58 ns</span></div>
         <div class="metric-line"><span class="m-label">Violating endpoints</span><span class="m-value">16</span></div>
+        <div class="metric-line"><span class="m-label">Total power</span><span class="m-value">9.88 mW</span></div>
       </div>
       <div class="results-col after">
         <span class="col-tag">After — Milestone 4 (final)</span>
         <div class="metric-line"><span class="m-label">Worst negative slack</span><span class="m-value">+0.55 ns</span></div>
         <div class="metric-line"><span class="m-label">Total negative slack</span><span class="m-value">0.00 ns</span></div>
         <div class="metric-line"><span class="m-label">Violating endpoints</span><span class="m-value">0</span></div>
+        <div class="metric-line"><span class="m-label">Total power</span><span class="m-value">10.9 mW</span></div>
       </div>
     </div>
     <div class="milestone-track">
@@ -432,7 +434,7 @@
         <tr class="final"><td>M4</td><td>+ GenAI 2nd pipeline stage (3-stage)</td><td class="mono-num pos">+0.55 ns</td><td class="mono-num zero">0.00 ns</td><td>0</td></tr>
       </table>
     </div>
-    <p class="sdc-note">Final design: <strong style="color:var(--paper)">4,283 cells, 56,054 µm²</strong> at 100% utilization — a 4.4% area cost for a fully-closed 3-stage pipeline. Every other clock domain's WNS moved by at most ±0.3ns between M3 and M4, confirming the fix was surgical.</p>
+    <p class="sdc-note">Final design: <strong style="color:var(--paper)">4,283 cells, 56,054 µm²</strong> at 100% utilization — a 4.4% area and 10.3% power cost for a fully-closed 3-stage pipeline. Every other clock domain's WNS moved by at most ±0.3ns between M3 and M4, confirming the fix was surgical. Power measured via OpenSTA's default vectorless switching-activity assumptions, not simulation-derived. All timing and power figures are synthesis-stage, ideal-clock-network analysis at a single (TT) corner — standard for RTL-stage closure, not post-layout signoff timing.</p>
   </div>
 </section>
 
